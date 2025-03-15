@@ -38,16 +38,20 @@ function loadModel(modelPath, modelName) {
             console.log("Loaded geometry:", geometry);
 
             // Create a mesh with the loaded geometry
-            const material = new THREE.MeshNormalMaterial(); // You can change this to any material you prefer
+            const material = new THREE.MeshPhongMaterial({
+                color: 0xff0000, // Set the color to red (use any hex code you prefer)
+                specular: 0x555555, // Add a specular highlight
+                shininess: 30 // You can adjust the shininess for a shiny effect
+            }); // You can change this to any material you prefer
             const mesh = new THREE.Mesh(geometry, material);
 
             // Center the model and ensure it is vertically aligned
-            mesh.rotation.z = Math.PI / 2;
+            mesh.rotation.x = Math.PI / 2;
             mesh.rotation.y = 0;
             mesh.rotation.z = 0; // Rotate 90 degrees to align it vertically (if needed)
 
             // Position the model in the scene at the center
-            mesh.position.set(0, 0, 0);  // Place it at the center (0, 0, 0)
+            mesh.position.set(0, 6, -5);  // Place it at the center (0, 0, 0)
 
             // Add the mesh to the scene
             scene.add(mesh);
@@ -78,8 +82,9 @@ function animate() {
     // Rotate the DNA helix models (if they are loaded)
     scene.children.forEach(child => {
         if (child instanceof THREE.Mesh) {
-            //child.rotation.y += 0.01; // Rotate the models
-            //child.rotation.z += 0.01;
+            //child.rotation.y += 0.001; // Rotate the models
+            child.rotation.z += 0.01;
+            //child.rotation.x +=0.01
 
 
         }
