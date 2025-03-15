@@ -11,12 +11,20 @@
     rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.css">
+    <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.173.0/build/three.module.js",
+      "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.173.0/examples/jsm/"
+    }
+  }
+</script>
 
 </head>
 <body>
     <header>
         <a href ="about.html" class="logo">
-            <img src="IMAGES/images-removebg-preview.png" alt="regina maria">
+            <img src="../IMAGES/images-removebg-preview.png" alt="regina maria">
         </a>
         <ul class="navlist">
             <li><a href="about.html">Home</a></li>
@@ -36,9 +44,13 @@
                 <a href="#" class="btn">Try now!</a>
             </div>
         </div>
+        <div class="hero-img">
+            <div id="three-container"></div>
+        </div>
     </section>
 
     <script src="JS/script.js"></script>
+    <script type="module" src="JS/3d.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.js"></script>
 
   <script>

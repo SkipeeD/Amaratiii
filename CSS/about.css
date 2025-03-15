@@ -10,7 +10,7 @@
 {
     --bg-color: #0c0c0c;
     --text-color: white;
-    --main-color: #ae8957;
+    --main-color: #d71d31;
 
     --big-font:6.6rem;
     --p-font:1rem;
@@ -96,7 +96,7 @@ section
     position: relative;
     width: 100%;
     height: 100vh;
-    background: url(../images/bg.png);
+    background: url(../IMAGES/bg.png);
     background-size: cover;
     background-position: center;
     display:grid;
@@ -105,6 +105,30 @@ section
     gap: 2rem;
 
 }
+.hero-img {
+    width: 100%;
+    height: 100vh; /* Adjust this to ensure full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* Ensure no extra margin/padding that may affect alignment */
+    margin-bottom: 0px;
+    padding: 0;
+}
+
+#three-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end; /* Moves the spiral to the right */
+    align-items: center;
+    margin-right: 5%; /* Fine-tune this to align with the text */
+}
+
+
+
+
 .hero-text h1
 {
     transition: ease;
