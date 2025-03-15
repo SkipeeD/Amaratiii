@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
+import { FBXLoader } from "https://cdn.jsdelivr.net/npm/three@0.173/examples/jsm/loaders/FBXLoader.js";
+import { STLLoader } from "https://cdn.jsdelivr.net/npm/three@0.173/examples/jsm/loaders/STLLoader.js";
+
 
 // Get the div where we want to render the scene
 const container = document.getElementById('three-container');
@@ -48,16 +50,15 @@ function loadModel(modelPath, modelName) {
             // Center the model and ensure it is vertically aligned
             mesh.rotation.x = Math.PI / 2;
             mesh.rotation.y = 0;
-            mesh.rotation.z = 0; // Rotate 90 degrees to align it vertically (if needed)
+            mesh.rotation.z = 50; // Rotate 90 degrees to align it vertically (if needed)
 
             // Position the model in the scene at the center
-            mesh.position.set(0, 6, -5);  // Place it at the center (0, 0, 0)
+            mesh.position.set(0, 10, 0);  // Place it at the center (0, 0, 0)
 
             // Add the mesh to the scene
             scene.add(mesh);
 
-            // Optional: Scale or adjust position if necessary
-            mesh.scale.set(0.05, 0.05, 0.05);  // Ensure the model is visible
+            // Optional: Scale or adjust position if necessar
 
             console.log(`${modelName} added to the scene`);
         },
@@ -72,8 +73,8 @@ function loadModel(modelPath, modelName) {
 
 
 // **Load Haelix V1 and V2 models**
-loadModel('models/DNA-Haelix-v1.stl', 'Haelix V1');
-loadModel('models/DNA-Haelix-v2.stl', 'Haelix V2');
+loadModel('../MODELS/dna.stl', 'dna');
+
 
 // Animation loop
 function animate() {
@@ -91,9 +92,6 @@ function animate() {
     });
 
     renderer.render(scene, camera);
-
-    // Log the number of objects in the scene (helps verify if the models are loaded)
-    console.log("Objects in the scene:", scene.children.length);
 }
 
 animate();
