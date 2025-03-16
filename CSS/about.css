@@ -37,8 +37,8 @@ header
 .logo img
 {
     width: 100%;
-    width: 60px;
-    height: 60px;
+    width: 57px;
+    height: 57px;
 }
 .navlist
 {
@@ -107,12 +107,11 @@ section
 }
 .hero-img {
     width: 100%;
-    height: 100vh; /* Adjust this to ensure full height */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    /* Ensure no extra margin/padding that may affect alignment */
     margin-bottom: 0px;
     padding: 0;
 }
@@ -123,7 +122,7 @@ section
     display: flex;
     justify-content: flex-end; /* Moves the spiral to the right */
     align-items: center;
-    margin-right: 5%; /* Fine-tune this to align with the text */
+    margin-right: 5%;
 }
 
 

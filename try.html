@@ -3,20 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBuddy - Try</title>
     <link rel="stylesheet" type="text/css" href="CSS/about.css">
-    <title>HealthBuddy</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-    rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.css">
-
+    <style>
+        .recommendation-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 3px solid #d71d31;
+            background-color: transparent;
+            color: #ffffff;
+        }
+        .recommendations-container {
+            color: #ffffff;
+        }
+        .recommendations-container h3 {
+            color: #d71d31;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .recommendations-container h4 {
+            color: #d71d31;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .recommendations-container p {
+            color: #ffffff;
+        }
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #recommendations-section {
+            background-color: transparent;
+        }
+        #recommendations-section h2 {
+            color: #ffffff;
+        }
+        .error-message {
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <a href ="about.html" class="logo">
-            <img src="../IMAGES/images-removebg-preview.png" alt="regina maria">
+        <a href="about.html" class="logo">
+            <img src="IMAGES/freepik__background__93504.png" alt="HealthBuddy Logo">
         </a>
         <ul class="navlist">
             <li><a href="about.html">Home</a></li>
@@ -27,24 +71,176 @@
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </header>
+
     <section class="hero">
         <div class="hero-text">
-            <h5 data-aos="fade-right" data-aos-duration="1400">#Your health app</h5>
-            <h1 data-aos="fade-down" data-aos-duration="1200">hahhahaha</h1>
-            <p data-aos="fade" data-aos-duration="3000">Get the right answer from the right place!</p>
-            <div class="main-hero">
-                <a href="#" class="btn">Try now!</a>
+            <h1 data-aos="fade-down" data-aos-duration="1200">Health Assessment</h1>
+            <p data-aos="fade" data-aos-duration="3000">Enter your health data and get AI-powered recommendations!</p>
+            <form id="health-form" class="health-form" data-aos="fade-up" data-aos-duration="1500">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" required>
+
+                <label for="blood-pressure">Blood Pressure:</label>
+                <input type="text" id="blood-pressure" name="bloodPressure" placeholder="e.g., 120/80" required>
+
+                <label for="oxygen-sat">Oxygen Saturation (%):</label>
+                <input type="number" id="oxygen-sat" name="oxygenSaturation" required>
+
+                <button type="submit" class="btn">Get Recommendations</button>
+            </form>
+
+            <!-- Display recommendations here -->
+            <div id="recommendations-section" style="display:none;">
+                <h2>Health Recommendations</h2>
+                <div id="loading" class="loader" style="display:none;"></div>
+                <div id="recommendations-content"></div>
             </div>
         </div>
     </section>
 
-    <script src="JS/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ offset: 1 });
 
-  <script>
-    AOS.init({
-        offset:1,
+        document.getElementById('health-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Show loading indicator
+            const loadingIndicator = document.getElementById('loading');
+            const recommendationsSection = document.getElementById('recommendations-section');
+            const recommendationsContent = document.getElementById('recommendations-content');
+
+            recommendationsSection.style.display = 'block';
+            loadingIndicator.style.display = 'block';
+            recommendationsContent.innerHTML = '';
+
+            // Get form values
+            const gender = document.getElementById('gender').value;
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value;
+            const bloodPressure = document.getElementById('blood-pressure').value;
+            const oxygenSaturation = document.getElementById('oxygen-sat').value;
+
+            // Calculate BMI
+            const heightInMeters = height / 100;
+            const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+
+            // Create prompt for ChatGPT
+            const prompt = `Based on the following health data, provide concise health recommendations:
+            - Gender: ${gender}
+            - Weight: ${weight} kg
+            - Height: ${height} cm
+            - BMI: ${bmi}
+            - Blood Pressure: ${bloodPressure}
+            - Oxygen Saturation: ${oxygenSaturation}%
+
+            Give specific actionable recommendations regarding diet, exercise, and lifestyle based on these metrics. Format your response with markdown headers for categories (### Diet, ### Exercise, ### Lifestyle) and bullet points for specific recommendations.`;
+
+            // API request data
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
+                    'x-rapidapi-key': 'fe23ba1c2cmshebaea69ff31f125p117ba1jsna9a7ff75cdf9'
+                },
+                body: JSON.stringify({
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": prompt
+                        }
+                    ],
+                    "system_prompt": "You are a health advisor that provides concise, evidence-based health recommendations. Format your response with markdown headers for categories (### Diet, ### Exercise, ### Lifestyle) and bullet points for specific recommendations. Provide only the recommendations without any additional messages. Add a disclaimer. Do not use bold formatting (**) in your headers.",
+                    "temperature": 0.7,
+                    "top_k": 5,
+                    "top_p": 0.9,
+                    "max_tokens": 256,
+                    "web_access": false
+                })
+            };
+
+            // Make API call
+            fetch('https://chatgpt-42.p.rapidapi.com/conversationgpt4', options)
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+
+                    // Parse the response
+                    if (data && data.result) {
+                        const recommendations = data.result;
+                        console.log(data.result);
+
+                        let formattedHTML = '<div class="recommendations-container">';
+
+                        // Process markdown formatting with improved parsing
+                        const lines = recommendations.split('\n').filter(line => line.trim() !== '');
+
+                        lines.forEach(line => {
+                            line = line.trim();
+
+                            // Handle headers with bold markers (### Header ** or ### **Header**)
+                            if (line.startsWith('###')) {
+                                // Remove ### prefix
+                                let headerText = line.replace('###', '').trim();
+
+                                // Remove any ** markers
+                                headerText = headerText.replace(/\*\*/g, '').trim();
+
+                                formattedHTML += `<h3>${headerText}</h3>`;
+                            }
+                            // Handle subheaders with bold markers
+                            else if (line.startsWith('####')) {
+                                // Remove #### prefix
+                                let headerText = line.replace('####', '').trim();
+
+                                // Remove any ** markers
+                                headerText = headerText.replace(/\*\*/g, '').trim();
+
+                                formattedHTML += `<h4>${headerText}</h4>`;
+                            }
+                            // Process bullet points
+                            else if (line.startsWith('-') || line.startsWith('*') && !line.startsWith('**')) {
+                                // Get the bullet text and handle any markdown inside it
+                                let bulletText = line.substring(1).trim();
+
+                                // Handle any bold formatting inside the bullet point
+                                bulletText = bulletText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                                formattedHTML += `<div class="recommendation-item">${bulletText}</div>`;
+                            }
+                            // Handle regular text, including handling bold markers
+                            else {
+                                // Handle any bold formatting
+                                let processedText = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                                formattedHTML += `<p>${processedText}</p>`;
+                            }
+                        });
+
+                        formattedHTML += '</div>';
+                        recommendationsContent.innerHTML = formattedHTML;
+                    } else {
+                        recommendationsContent.innerHTML = '<p class="error-message">Sorry, we could not generate recommendations at this time. Please try again later.</p>';
+                    }
+                })
+                .catch(error => {
+                    loadingIndicator.style.display = 'none';
+                    recommendationsContent.innerHTML = '<p class="error-message">An error occurred while getting recommendations. Please try again later.</p>';
+                    console.error('Error:', error);
+                });
         });
-  </script>
+    </script>
 </body>
 </html>
