@@ -73,7 +73,7 @@ function loadModel(modelPath, modelName) {
 
 
 // **Load Haelix V1 and V2 models**
-loadModel('../MODELS/dna.stl', 'dna');
+loadModel('../3D/dna.stl', 'dna');
 
 
 // Animation loop

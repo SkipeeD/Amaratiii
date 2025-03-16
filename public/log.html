@@ -2,33 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Login - HealthBuddy</title>
     <link rel="stylesheet" href="CSS/log.css">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
 <body>
     <div class="wrapper">
-        <form action="https://formspree.io/f/mwplplvl" method="POST" id="health-form">
+        <form id="login-form">
             <h1>Login</h1>
             <div class="input-box">
-                <input type="email" name="Email" placeholder="Email" required>
+                <input type="text" name="username" id="username" placeholder="Username" required>
             </div>
             <div class="input-box">
-                <input type="text" name = "unique-id" placeholder="unique-id" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
             </div>
             <div class="remeber-forgot">
-                <label><input type="checkbox">Remeber me</label>
+                <label><input type="checkbox">Remember me</label>
                 <a href="#">Forgot password?</a>
             </div>
             <button type="submit" class="btn">Login</button>
             <div class="register-link">
-                <p>Don't have an account? <a href="#">Register</a></p>
+                <p>Don't have an account? <a href="register.html">Register</a></p>
             </div>
-              <a href="about.html" class="main-page-btn">
+            <a href="about.html" class="main-page-btn">
                 <button type="button" class="btn">Home</button>
-              </a>
+            </a>
         </form>
     </div>
+    <script src="js/auth.js"></script>
 </body>
 </html>

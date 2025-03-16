@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBuddy - History</title>
+    <link rel="stylesheet" type="text/css" href="CSS/history.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.css">
+    <style>
+
+        .history-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .history-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .assessment-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            color: #333;
+        }
+
+        .assessment-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .assessment-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .metric {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .metric-label {
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        .recommendations {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            color: #333;
+            white-space: pre-wrap;
+        }
+
+        .recommendations h3 {
+            color: #0056b3;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .recommendations ul, .recommendations ol {
+            padding-left: 20px;
+        }
+
+        .recommendations li, .recommendations p {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .no-history {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #003d82;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="about.html" class="logo">
+            <img src="IMAGES/freepik__background__93504.png" alt="HealthBuddy Logo">
+        </a>
+        <ul class="navlist">
+            <li><a href="about.html">Home</a></li>
+            <li><a href="try.html">Buddy</a></li>
+            <li><a href="index.html">About</a></li>
+        </ul>
+        <div class="right-content">
+            <a href="#" id="logout-btn" class="nav-btn">Logout</a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="bx bx-x close-menu" id="close-menu"></div>
+        <ul>
+            <li><a href="about.html">Home</a></li>
+            <li><a href="try.html">Try</a></li>
+            <li><a href="#" id="mobile-logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+    <div class="history-container">
+        <h1 class="history-title" data-aos="fade-down" data-aos-duration="1200">Your Health History</h1>
+        <div id="history-content" data-aos="fade-up" data-aos-duration="1500">
+            <!-- Fallback content that will show if JavaScript fails -->
+            <noscript>
+                <div class="no-history">
+                    <h3>JavaScript Required</h3>
+                    <p>Please enable JavaScript to view your health history.</p>
+                </div>
+            </noscript>
+            <div class="loading">Loading your health history...</div>
+        </div>
+    </div>
+</section>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        AOS.init({ offset: 1 });
+        // Check if user is logged in immediately
+document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+        window.location.href = 'log.html';
+        return;
+    }
+
+    // Load user's health history
+    loadHealthHistory(user.username);
+
+    // Logout functionality
+    document.getElementById('logout-btn').addEventListener('click', logout);
+    if (document.getElementById('mobile-logout')) {
+        document.getElementById('mobile-logout').addEventListener('click', logout);
+    }
+});
+        const API_BASE_URL = 'http://localhost:3000';
+        // Mobile menu functionality
+        const menuIcon = document.getElementById('menu-icon');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuIcon.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                window.location.href = 'log.html';
+                return;
+            }
+console.log('User found:', user);
+console.log('Attempting to load health history for:', user.username);
+            // Load user's health history
+            loadHealthHistory(user.username);
+
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', logout);
+            document.getElementById('mobile-logout').addEventListener('click', logout);
+        });
+
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = 'log.html';
+        }
+
+        async function loadHealthHistory(username) {
+    const historyContent = document.getElementById('history-content');
+    historyContent.innerHTML = '<div class="loading">Loading your health history...</div>';
+
+    try {
+        console.log(`Fetching history for ${username} from ${API_BASE_URL}/user-health-history/${username}`);
+
+        // Add a timeout to the fetch to avoid hanging indefinitely
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        const response = await fetch(`${API_BASE_URL}/user-health-history/${username}`, {
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            throw new Error(`Server responded with status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('History data received:', data);
+
+        // Show a default message even if no data is returned
+        if (!data || data.length === 0) {
+            historyContent.innerHTML = `
+                <div class="no-history">
+                    <h3>No health assessments found</h3>
+                    <p>Complete your first health assessment to start tracking your health journey!</p>
+                    <a href="try.html" class="btn">Take Assessment</a>
+                </div>`;
+            return;
+        }
+
+        // Rest of your code...
+const menuIcon = document.getElementById('menu-icon');
+const closeMenu = document.getElementById('close-menu');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (menuIcon && closeMenu && mobileMenu) {
+    menuIcon.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+    });
+
+    closeMenu.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+    });
+}
+                let historyHTML = '';
+
+                data.forEach(assessment => {
+                    const date = new Date(assessment.createdAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    // Calculate BMI if height and weight are available
+                    let bmiDisplay = '';
+                    if (assessment.height && assessment.weight) {
+                        const heightInMeters = assessment.height / 100;
+                        const bmi = (assessment.weight / (heightInMeters * heightInMeters)).toFixed(1);
+                        bmiDisplay = `
+                              <div class="metric">
+                            <div class="metric-label">BMI</div>
+                            <div class="metric-value">${bmi}</div>
+                        </div> `;
+                    }
+
+                    historyHTML += `
+                        <div class="assessment-card">
+                            <div class="assessment-date">${date}</div>
+                            <div class="assessment-metrics">
+                                <div class="metric">
+                                    <div class="metric-label">Gender</div>
+                                    <div class="metric-value">${assessment.gender}</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Weight</div>
+                                    <div class="metric-value">${assessment.weight} kg</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Height</div>
+                                    <div class="metric-value">${assessment.height} cm</div>
+                                </div>
+                                ${bmiDisplay}
+                                <div class="metric">
+                                    <div class="metric-label">Blood Pressure</div>
+                                    <div class="metric-value">${assessment.bloodPressure}</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Oxygen Saturation</div>
+                                    <div class="metric-value">${assessment.oxygenSaturation}%</div>
+                                </div>
+                            </div>
+                            <h3>Recommendations</h3>
+                            <div class="recommendations">
+                                ${assessment.recommendations || 'No recommendations available'}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                historyContent.innerHTML = historyHTML;
+
+              } catch (error) {
+        console.error('Error loading health history:', error);
+        historyContent.innerHTML = `
+            <div class="no-history">
+                <h3>Error loading health history</h3>
+                <p>Could not connect to the health server. Please check your connection and try again.</p>
+                <p>Error details: ${error.message}</p>
+                <a href="try.html" class="btn">Return to Assessment</a>
+            </div>
+        `;
+    }
+}
+
+    </script>
+</body>
+</html>

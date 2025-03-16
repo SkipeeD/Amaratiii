@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.css">
+       <style>
+        /* Additional custom styles */
+        .hero-text h1 {
+            font-size: 2.2rem; /* Reduced font size for the main title */
+            margin-top: 60px; /* Add top margin to lower the title position */
+            margin-bottom: 50px; /* Add spacing below the title */
+        }
+
+        .benefits-list li {
+            margin-bottom: 15px; /* Add more space between Key Features list items */
+        }
+
+        .about-section {
+            margin-bottom: 40px; /* Increase spacing between sections */
+        }
+
+        /* Specifically target the Key Features section for extra spacing */
+        .about-section:nth-of-type(3) {
+            margin-bottom: 60px; /* Extra space after Key Features section */
+        }
+
+        /* Add spacing between "How HealthBuddy Works" heading and the feature box */
+        .about-section h2 {
+            margin-bottom: 25px; /* Add more space below all section headings */
+        }
+
+        /* Specifically adjust the second section (How HealthBuddy Works) */
+        .about-section:nth-of-type(2) .feature-box {
+            margin-top: 30px; /* Extra space after the "How HealthBuddy Works" heading */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -20,7 +51,6 @@
             <li><a href="#">About</a></li>
         </ul>
         <div class="right-content">
-            <a href="log.html" class="nav-btn">Log In</a>
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </header>
@@ -38,11 +68,11 @@
     <section class="hero">
         <div class="hero-text">
             <h1 data-aos="fade-down" data-aos-duration="1200">About HealthBuddy</h1>
-            <h5 data-aos="fade" data-aos-duration="1000">Your Personal Health Assistant</h5>
+<!--            <h5 data-aos="fade" data-aos-duration="1000">Your Personal Health Assistant</h5>-->
 
-            <p data-aos="fade" data-aos-duration="1500">
-                HealthBuddy is an innovative AI-powered health assessment application designed to provide personalized health recommendations based on your vital measurements. Our mission is to make health guidance accessible to everyone, everywhere.
-            </p>
+<!--            <p data-aos="fade" data-aos-duration="1500">-->
+<!--                HealthBuddy is an innovative AI-powered health assessment application designed to provide personalized health recommendations based on your vital measurements. Our mission is to make health guidance accessible to everyone, everywhere.-->
+<!--            </p>-->
 
             <div class="about-section" data-aos="fade-up" data-aos-duration="1500">
                 <h2>Our Story</h2>
@@ -114,10 +144,11 @@
             </div>
 
             <div class="main-hero" data-aos="fade-up" data-aos-duration="1000">
-                <a href="pre-try.html" class="btn">Try HealthBuddy Now</a>
+<!--                <a href="pre-try.html" class="btn">Try HealthBuddy Now</a>-->
             </div>
         </div>
     </section>
+
 
     <script src="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.js"></script>
     <script>
@@ -136,5 +167,6 @@
             mobileMenu.classList.remove('active');
         });
     </script>
+<script src="js/auth.js"></script>
 </body>
 </html>
