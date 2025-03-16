@@ -157,7 +157,7 @@
     <script src="js/auth.js"></script>
     <script>
         AOS.init({ offset: 1 });
-        // Check if user is logged in immediately
+
 document.addEventListener('DOMContentLoaded', function() {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) {
@@ -165,17 +165,17 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Load user's health history
+
     loadHealthHistory(user.username);
 
-    // Logout functionality
+
     document.getElementById('logout-btn').addEventListener('click', logout);
     if (document.getElementById('mobile-logout')) {
         document.getElementById('mobile-logout').addEventListener('click', logout);
     }
 });
         const API_BASE_URL = 'http://localhost:3000';
-        // Mobile menu functionality
+
         const menuIcon = document.getElementById('menu-icon');
         const closeMenu = document.getElementById('close-menu');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.classList.remove('active');
         });
 
-        // Check if user is logged in
+
         document.addEventListener('DOMContentLoaded', function() {
             const user = JSON.parse(localStorage.getItem('user'));
             if (!user) {
@@ -217,7 +217,7 @@ console.log('Attempting to load health history for:', user.username);
     try {
         console.log(`Fetching history for ${username} from ${API_BASE_URL}/user-health-history/${username}`);
 
-        // Add a timeout to the fetch to avoid hanging indefinitely
+
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
 
@@ -234,7 +234,7 @@ console.log('Attempting to load health history for:', user.username);
         const data = await response.json();
         console.log('History data received:', data);
 
-        // Show a default message even if no data is returned
+
         if (!data || data.length === 0) {
             historyContent.innerHTML = `
                 <div class="no-history">
@@ -245,80 +245,67 @@ console.log('Attempting to load health history for:', user.username);
             return;
         }
 
-        // Rest of your code...
-const menuIcon = document.getElementById('menu-icon');
-const closeMenu = document.getElementById('close-menu');
-const mobileMenu = document.getElementById('mobile-menu');
 
-if (menuIcon && closeMenu && mobileMenu) {
-    menuIcon.addEventListener('click', () => {
-        mobileMenu.classList.add('active');
-    });
+        let historyHTML = '';
 
-    closeMenu.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-    });
-}
-                let historyHTML = '';
+        data.forEach(assessment => {
+            const date = new Date(assessment.createdAt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
 
-                data.forEach(assessment => {
-                    const date = new Date(assessment.createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
 
-                    // Calculate BMI if height and weight are available
-                    let bmiDisplay = '';
-                    if (assessment.height && assessment.weight) {
-                        const heightInMeters = assessment.height / 100;
-                        const bmi = (assessment.weight / (heightInMeters * heightInMeters)).toFixed(1);
-                        bmiDisplay = `
-                              <div class="metric">
-                            <div class="metric-label">BMI</div>
-                            <div class="metric-value">${bmi}</div>
-                        </div> `;
-                    }
+            let bmiDisplay = '';
+            if (assessment.height && assessment.weight) {
+                const heightInMeters = assessment.height / 100;
+                const bmi = (assessment.weight / (heightInMeters * heightInMeters)).toFixed(1);
+                bmiDisplay = `
+                    <div class="metric">
+                        <div class="metric-label">BMI</div>
+                        <div class="metric-value">${bmi}</div>
+                    </div>`;
+            }
 
-                    historyHTML += `
-                        <div class="assessment-card">
-                            <div class="assessment-date">${date}</div>
-                            <div class="assessment-metrics">
-                                <div class="metric">
-                                    <div class="metric-label">Gender</div>
-                                    <div class="metric-value">${assessment.gender}</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-label">Weight</div>
-                                    <div class="metric-value">${assessment.weight} kg</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-label">Height</div>
-                                    <div class="metric-value">${assessment.height} cm</div>
-                                </div>
-                                ${bmiDisplay}
-                                <div class="metric">
-                                    <div class="metric-label">Blood Pressure</div>
-                                    <div class="metric-value">${assessment.bloodPressure}</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-label">Oxygen Saturation</div>
-                                    <div class="metric-value">${assessment.oxygenSaturation}%</div>
-                                </div>
-                            </div>
-                            <h3>Recommendations</h3>
-                            <div class="recommendations">
-                                ${assessment.recommendations || 'No recommendations available'}
-                            </div>
+            historyHTML += `
+                <div class="assessment-card">
+                    <div class="assessment-date">${date}</div>
+                    <div class="assessment-metrics">
+                        <div class="metric">
+                            <div class="metric-label">Gender</div>
+                            <div class="metric-value">${assessment.gender}</div>
                         </div>
-                    `;
-                });
+                        <div class="metric">
+                            <div class="metric-label">Weight</div>
+                            <div class="metric-value">${assessment.weight} kg</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Height</div>
+                            <div class="metric-value">${assessment.height} cm</div>
+                        </div>
+                        ${bmiDisplay}
+                        <div class="metric">
+                            <div class="metric-label">Blood Pressure</div>
+                            <div class="metric-value">${assessment.bloodPressure}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Oxygen Saturation</div>
+                            <div class="metric-value">${assessment.oxygenSaturation}%</div>
+                        </div>
+                    </div>
+                    <h3>Recommendations</h3>
+                    <div class="recommendations">
+                        ${assessment.recommendations || 'No recommendations available'}
+                    </div>
+                </div>
+            `;
+        });
 
-                historyContent.innerHTML = historyHTML;
+        historyContent.innerHTML = historyHTML;
 
-              } catch (error) {
+    } catch (error) {
         console.error('Error loading health history:', error);
         historyContent.innerHTML = `
             <div class="no-history">
