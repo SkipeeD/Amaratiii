@@ -1,0 +1,150 @@
+/* Additional CSS for About Page */
+.about-section {
+    margin: 40px 0;
+    width: 100%;
+}
+
+.about-section p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.feature-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.feature {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feature i {
+    font-size: 40px;
+    color: var(--main-color);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.feature h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.benefits-list {
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.benefits-list i {
+    color: var(--main-color);
+    font-size: 20px;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.benefits-list span strong {
+    color: var(--main-color);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.close-menu {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    font-size: 42px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.mobile-menu ul {
+    list-style: none;
+}
+
+.mobile-menu ul li {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.mobile-menu ul li a {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.mobile-menu ul li a:hover {
+    color: var(--main-color);
+}
+
+/* Responsive Adjustments */
+@media(max-width: 950px) {
+    .feature-box {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .hero-text h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero-text h5 {
+        font-size: 1rem;
+    }
+
+    .about-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media(max-width: 570px) {
+    .main-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .main-hero a {
+        margin-bottom: 15px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.8rem;
+    }
+}

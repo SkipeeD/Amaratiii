@@ -41,7 +41,7 @@ function loadModel(modelPath, modelName) {
 
             // Create a mesh with the loaded geometry
             const material = new THREE.MeshPhongMaterial({
-                color: 0xff0000, // Set the color to red (use any hex code you prefer)
+                color: 0xff000d, // Set the color to red (use any hex code you prefer)
                 specular: 0x555555, // Add a specular highlight
                 shininess: 30 // You can adjust the shininess for a shiny effect
             }); // You can change this to any material you prefer

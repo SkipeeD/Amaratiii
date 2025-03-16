@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBuddy - About</title>
+    <link rel="stylesheet" type="text/css" href="CSS/try.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.css">
+</head>
+<body>
+    <header>
+        <a href="about.html" class="logo">
+            <img src="IMAGES/freepik__background__93504.png" alt="HealthBuddy Logo">
+        </a>
+        <ul class="navlist">
+            <li><a href="about.html">Home</a></li>
+            <li><a href="try.html">Buddy</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <div class="right-content">
+            <a href="log.html" class="nav-btn">Log In</a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="bx bx-x close-menu" id="close-menu"></div>
+        <ul>
+            <li><a href="about.html">Home</a></li>
+            <li><a href="try.html">Buddy</a></li>
+            <li><a href="log.html">Sign In</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1 data-aos="fade-down" data-aos-duration="1200">About HealthBuddy</h1>
+            <h5 data-aos="fade" data-aos-duration="1000">Your Personal Health Assistant</h5>
+
+            <p data-aos="fade" data-aos-duration="1500">
+                HealthBuddy is an innovative AI-powered health assessment application designed to provide personalized health recommendations based on your vital measurements. Our mission is to make health guidance accessible to everyone, everywhere.
+            </p>
+
+            <div class="about-section" data-aos="fade-up" data-aos-duration="1500">
+                <h2>Our Story</h2>
+                <p>
+                    HealthBuddy was created with a simple vision: to democratize access to personalized health insights.
+                    We recognized that many people don't have regular access to healthcare professionals but still need
+                    guidance on their health journey. By combining cutting-edge AI technology with evidence-based health
+                    science, we've developed a tool that gives you actionable recommendations tailored to your unique profile.
+                </p>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-duration="1500">
+                <h2>How HealthBuddy Works</h2>
+                <div class="feature-box">
+                    <div class="feature">
+                        <i class='bx bx-data'></i>
+                        <h3>Data Collection</h3>
+                        <p>Simply enter your basic health metrics including gender, weight, height, blood pressure, and oxygen saturation through our user-friendly interface.</p>
+                    </div>
+
+                    <div class="feature">
+                        <i class='bx bx-analyse'></i>
+                        <h3>AI Analysis</h3>
+                        <p>Our advanced AI system processes your data, calculates key health indicators like BMI, and compares your metrics against established health guidelines.</p>
+                    </div>
+
+                    <div class="feature">
+                        <i class='bx bx-list-check'></i>
+                        <h3>Personalized Recommendations</h3>
+                        <p>Receive tailored recommendations organized into three key areas: Diet, Exercise, and Lifestyle changes that can help improve your overall health.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-duration="1500">
+                <h2>Key Features</h2>
+                <ul class="benefits-list">
+                    <li><i class='bx bx-check'></i> <span><strong>Evidence-based Guidance:</strong> All recommendations are grounded in current health science and medical guidelines</span></li>
+                    <li><i class='bx bx-check'></i> <span><strong>Personalized Approach:</strong> Recommendations tailored to your specific metrics, not generic advice</span></li>
+                    <li><i class='bx bx-check'></i> <span><strong>Actionable Steps:</strong> Practical suggestions you can implement right away</span></li>
+                    <li><i class='bx bx-check'></i> <span><strong>User Privacy:</strong> Your health data is processed securely and never stored</span></li>
+                    <li><i class='bx bx-check'></i> <span><strong>Accessible Design:</strong> Simple interface that's easy to use for everyone</span></li>
+                </ul>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-duration="1500">
+                <h2>Using HealthBuddy</h2>
+                <p>
+                    Getting started with HealthBuddy is easy. Simply navigate to the "Try" page, enter your health metrics,
+                    and click "Get Recommendations." Within seconds, you'll receive personalized health guidance covering diet,
+                    exercise, and lifestyle suggestions. Our recommendations are presented in a clear, easy-to-understand format
+                    that helps you take immediate action toward better health.
+                </p>
+                <p>
+                    While HealthBuddy provides valuable health insights, it's designed to complement, not replace, professional
+                    medical advice. We encourage you to share your HealthBuddy recommendations with your healthcare provider
+                    during your next visit.
+                </p>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-duration="1500">
+                <h2>Our Technology</h2>
+                <p>
+                    HealthBuddy utilizes advanced natural language processing and machine learning algorithms to generate
+                    personalized health recommendations. Our system is continuously updated to reflect the latest health research
+                    and guidelines. We've designed our AI to provide specific, actionable advice rather than vague generalizations,
+                    ensuring you receive meaningful guidance that can make a real difference in your health journey.
+                </p>
+            </div>
+
+            <div class="main-hero" data-aos="fade-up" data-aos-duration="1000">
+                <a href="pre-try.html" class="btn">Try HealthBuddy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ offset: 1 });
+
+        // Mobile menu functionality
+        const menuIcon = document.getElementById('menu-icon');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuIcon.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
