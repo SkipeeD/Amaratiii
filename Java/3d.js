@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { FBXLoader } from "https://cdn.jsdelivr.net/npm/three@0.173/examples/jsm/loaders/FBXLoader.js";
-import { STLLoader } from "https://cdn.jsdelivr.net/npm/three@0.173/examples/jsm/loaders/STLLoader.js";
+ import { STLLoader } from "https://cdn.jsdelivr.net/npm/three@0.173/examples/jsm/loaders/STLLoader.js";
 
 
 // Get the div where we want to render the scene
@@ -72,15 +72,15 @@ function loadModel(modelPath, modelName) {
 }
 
 
-// **Load Haelix V1 and V2 models**
+
 loadModel('../3D/dna.stl', 'dna');
 
 
-// Animation loop
+
 function animate() {
     requestAnimationFrame(animate);
 
-    // Rotate the DNA helix models (if they are loaded)
+
     scene.children.forEach(child => {
         if (child instanceof THREE.Mesh) {
             //child.rotation.y += 0.001; // Rotate the models
@@ -96,7 +96,7 @@ function animate() {
 
 animate();
 
-// Handle resizing
+
 window.addEventListener('resize', () => {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();

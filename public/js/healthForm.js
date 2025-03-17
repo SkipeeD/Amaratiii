@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
             - Blood Pressure: ${bloodPressure}
             - Oxygen Saturation: ${oxygenSaturation}%
 
-            Give specific actionable recommendations regarding diet, exercise, and lifestyle based on these metrics. Format your response with markdown headers for categories (### Diet, ### Exercise, ### Lifestyle) and bullet points for specific recommendations.`;
+            Give specific actionable recommendations regarding diet, exercise, and lifestyle based on these metrics. Format your response with markdown headers for categories (### Diet, ### Exercise, ### Lifestyle) and bullet points for specific recommendations.Do not add any additional messages at the beginning or at the end, the response should only contain the recommendations.`;
 
 
             const options = {
